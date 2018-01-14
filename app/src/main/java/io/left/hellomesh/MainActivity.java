@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements MeshStateListener {
     // Port to bind app to.
     private static final int HELLO_PORT = 9876;
 
-    private String username= "";
+    private String username = "";
 
     // MeshManager instance - interface to the mesh network.
     AndroidMeshManager mm = null;
@@ -45,10 +45,11 @@ public class MainActivity extends Activity implements MeshStateListener {
     // Set to keep track of peers connected to the mesh.
     HashSet<MeshID> users = new HashSet<>();
 
-    Button   mButton;
+    Button mButton;
     EditText mEdit;
-    TextView lastmes;
+    String lastmes;
     ScrollView cont;
+//    TextView messageView;
 
     /**
      * Called when app first opens, initializes {@link AndroidMeshManager} reference (which will
@@ -61,9 +62,9 @@ public class MainActivity extends Activity implements MeshStateListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mButton = (Button)findViewById(R.id.button2);
-        mEdit   = (EditText)findViewById(R.id.input_message);
-        lastmes = (TextView)findViewById(R.id.last_recieved_message);
+        mButton = (Button) findViewById(R.id.button2);
+        mEdit = (EditText) findViewById(R.id.input_message);
+        lastmes = ((TextView) findViewById(R.id.last_recieved_message)).getText().toString();
         cont = ((ScrollView) findViewById(R.id.message_container));
 
 
@@ -84,7 +85,7 @@ public class MainActivity extends Activity implements MeshStateListener {
         mOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!(username=(mUsername.getText().toString())).isEmpty()) {
+                if (!(username = (mUsername.getText().toString())).isEmpty()) {
                     Toast.makeText(MainActivity.this,
                             R.string.success_login_msg,
                             Toast.LENGTH_SHORT).show();
@@ -126,14 +127,14 @@ public class MainActivity extends Activity implements MeshStateListener {
         } catch (MeshService.ServiceDisconnectedException e) {
             e.printStackTrace();
         }
-        
+
     }
 
     /**
      * Called by the {@link MeshService} when the mesh state changes. Initializes mesh connection
      * on first call.
      *
-     * @param uuid our own user id on first detecting
+     * @param uuid  our own user id on first detecting
      * @param state state which indicates SUCCESS or an error code
      */
     @Override
@@ -150,6 +151,7 @@ public class MainActivity extends Activity implements MeshStateListener {
                     public void accept(Object o) throws Exception {
                         handleDataReceived((MeshManager.RightMeshEvent) o);
                     }
+
                 });
                 mm.on(PEER_CHANGED, new Consumer() {
                     @Override
@@ -157,6 +159,7 @@ public class MainActivity extends Activity implements MeshStateListener {
                         handlePeerChanged((MeshManager.RightMeshEvent) o);
                     }
                 });
+
 
                 // If you are using Java 8 or a lambda backport like RetroLambda, you can use
                 // a more concise syntax, like the following:
@@ -193,6 +196,8 @@ public class MainActivity extends Activity implements MeshStateListener {
         }
         TextView txtStatus = (TextView) findViewById(R.id.txtStatus);
         txtStatus.setText(status);
+        TextView messageView = (TextView) findViewById(R.id.last_recieved_message);
+        messageView.setText(lastmes);
     }
 
     /**
@@ -214,7 +219,7 @@ public class MainActivity extends Activity implements MeshStateListener {
                 r.play();
                 DateFormat df = new SimpleDateFormat("HH:mm:ss");
                 Date d = new Date();
-                lastmes.append(df.format(d)+ ": " + message+"\n");
+                lastmes += df.format(d) + ": " + message + "\n";
                 cont.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
@@ -230,12 +235,14 @@ public class MainActivity extends Activity implements MeshStateListener {
         MeshManager.PeerChangedEvent event = (MeshManager.PeerChangedEvent) e;
         if (event.state != REMOVED && !users.contains(event.peerUuid)) {
             users.add(event.peerUuid);
-        } else if (event.state == REMOVED){
+        } else if (event.state == REMOVED) {
             users.remove(event.peerUuid);
         }
+
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         Date d = new Date();
-        lastmes.append( df.format(d) + ": " + event.peerUuid.toString()+" has Connected! \n");
+//        lastmes += df.format(d) + ": " + event.peerUuid.toString() + " has Connected! \n";
+
         // Update display.
         runOnUiThread(new Runnable() {
             @Override
@@ -251,16 +258,17 @@ public class MainActivity extends Activity implements MeshStateListener {
      * @param v calling view
      */
     public void sendHello(View v) throws RightMeshException {
-        for(MeshID receiver : users) {
+        for (MeshID receiver : users) {
             String msg = "Hello to: " + receiver + " from" + mm.getUuid();
             MeshUtility.Log(this.getClass().getCanonicalName(), "MSG: " + msg);
             byte[] testData = msg.getBytes();
             mm.sendDataReliable(receiver, HELLO_PORT, testData);
         }
     }
+
     public void sendMessage(View v) throws RightMeshException {
-        for(MeshID reciever : users) {
-            String ms= mEdit.getText().toString();
+        for (MeshID reciever : users) {
+            String ms = mEdit.getText().toString();
             MeshUtility.Log(this.getClass().getCanonicalName(), "MSG: " + ms);
             byte[] testData = ms.getBytes();
             mm.sendDataReliable(reciever, HELLO_PORT, testData);
@@ -272,11 +280,10 @@ public class MainActivity extends Activity implements MeshStateListener {
      *
      * @param v calling view
      */
-    public void configure(View v)
-    {
+    public void configure(View v) {
         try {
             mm.showSettingsActivity();
-        } catch(RightMeshException ex) {
+        } catch (RightMeshException ex) {
             MeshUtility.Log(this.getClass().getCanonicalName(), "Service not connected");
         }
     }
