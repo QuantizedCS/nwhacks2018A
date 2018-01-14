@@ -41,10 +41,10 @@
         android:id="@+id/input_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnHello"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtStatus"
-        android:layout_marginTop="50dp"
+        android:layout_marginBottom="18dp"
         android:ems="10"
         android:hint="@string/edit_Message"
         android:inputType="textPersonName" />
