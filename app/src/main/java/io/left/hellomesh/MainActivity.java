@@ -85,11 +85,11 @@ public class MainActivity extends Activity implements MeshStateListener {
         mOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!(username = (mUsername.getText().toString())).isEmpty()) {
+                if (!(mUsername.getText().toString().isEmpty())) {
                     Toast.makeText(MainActivity.this,
                             R.string.success_login_msg,
                             Toast.LENGTH_SHORT).show();
-
+                    username = mUsername.getText().toString();
                     dialog.hide();
 
                 } else {
