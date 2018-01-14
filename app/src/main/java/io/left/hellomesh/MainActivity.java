@@ -272,8 +272,8 @@ public class MainActivity extends Activity implements MeshStateListener {
             MeshUtility.Log(this.getClass().getCanonicalName(), "MSG: " + ms);
             byte[] testData = ms.getBytes();
             mm.sendDataReliable(reciever, HELLO_PORT, testData);
-            mEdit.setText("");
         }
+        mEdit.setText("");
     }
 
     /**
