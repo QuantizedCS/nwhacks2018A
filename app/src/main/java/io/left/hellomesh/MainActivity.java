@@ -250,9 +250,7 @@ public class MainActivity extends Activity implements MeshStateListener {
         //TextView txtStatus = (TextView) findViewById(R.id.txtStatus);
         //txtStatus.setText(status);
         userBox.setText(status);
-        if (lastmes.length()>100){
-            lastmes = lastmes.substring(lastmes.indexOf("\n"));
-        }
+        lastmes = lastmes.substring(lastmes.indexOf("\n"));
         TextView messageView = (TextView) findViewById(R.id.last_recieved_message);
         messageView.setText(lastmes);
     }
