@@ -73,7 +73,14 @@ public class MainActivity extends Activity implements MeshStateListener {
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
         mm.setPattern("chatroom");
 
+        changeUsername(userBox);
 
+
+
+
+    }
+
+    public void changeUsername(View v){
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_set_username, null);
 
