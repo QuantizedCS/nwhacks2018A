@@ -1,6 +1,7 @@
 package io.left.hellomesh;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -31,6 +32,8 @@ public class MainActivity extends Activity implements MeshStateListener {
     // Port to bind app to.
     private static final int HELLO_PORT = 9876;
 
+    private String username= "";
+
     // MeshManager instance - interface to the mesh network.
     AndroidMeshManager mm = null;
 
@@ -58,6 +61,36 @@ public class MainActivity extends Activity implements MeshStateListener {
 
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
         mm.setPattern("chatroom");
+
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_set_username, null);
+
+        final EditText mUsername = (EditText) mView.findViewById(R.id.etUsername);
+        Button mOK = (Button) mView.findViewById(R.id.mOK);
+
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        mOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!(username=(mUsername.getText().toString())).isEmpty()) {
+                    Toast.makeText(MainActivity.this,
+                            R.string.success_login_msg,
+                            Toast.LENGTH_SHORT).show();
+
+                    dialog.hide();
+
+                } else {
+                    Toast.makeText(MainActivity.this,
+                            R.string.error_username_msg,
+                            Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
     }
 
     /**
