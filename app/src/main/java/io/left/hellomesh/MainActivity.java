@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements MeshStateListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mButton = (Button) findViewById(R.id.button2);
+        mButton = (Button) findViewById(R.id.Send_Button);
         mEdit = (EditText) findViewById(R.id.input_message);
         lastmes = ((TextView) findViewById(R.id.last_recieved_message)).getText().toString();
         cont = ((ScrollView) findViewById(R.id.message_container));
