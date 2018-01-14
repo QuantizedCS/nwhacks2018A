@@ -9,10 +9,15 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
+import java.lang.Object;
 
 import io.left.rightmesh.android.AndroidMeshManager;
 import io.left.rightmesh.android.MeshService;
@@ -56,6 +61,7 @@ public class MainActivity extends Activity implements MeshStateListener {
         mEdit   = (EditText)findViewById(R.id.input_message);
         lastmes = (TextView)findViewById(R.id.last_recieved_message);
 
+
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
         mm.setPattern("chatroom");
     }
@@ -85,6 +91,7 @@ public class MainActivity extends Activity implements MeshStateListener {
         } catch (MeshService.ServiceDisconnectedException e) {
             e.printStackTrace();
         }
+        
     }
 
     /**
@@ -166,14 +173,13 @@ public class MainActivity extends Activity implements MeshStateListener {
             public void run() {
                 // Toast data contents.
                 String message = new String(event.data);
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-
                 // Play a notification.
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(MainActivity.this, notification);
                 r.play();
-
-                lastmes.append(message);
+                DateFormat df = new SimpleDateFormat("HH:mm:ss");
+                Date d = new Date();
+                lastmes.append(df.format(d)+ ": " + message+"\n");
             }
         });
     }
@@ -191,7 +197,9 @@ public class MainActivity extends Activity implements MeshStateListener {
         } else if (event.state == REMOVED){
             users.remove(event.peerUuid);
         }
-
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        Date d = new Date();
+        lastmes.append( df.format(d) + ": " + event.peerUuid.toString()+" has Connected! \n");
         // Update display.
         runOnUiThread(new Runnable() {
             @Override
@@ -236,5 +244,6 @@ public class MainActivity extends Activity implements MeshStateListener {
             MeshUtility.Log(this.getClass().getCanonicalName(), "Service not connected");
         }
     }
+
 }
 

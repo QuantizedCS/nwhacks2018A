@@ -44,9 +44,7 @@
         android:layout_above="@+id/btnHello"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="17dp"
-        android:layout_toLeftOf="@+id/btnConfigure"
-        android:layout_toStartOf="@+id/btnConfigure"
+        android:layout_marginBottom="22dp"
         android:ems="10"
         android:hint="@string/message"
         android:inputType="textPersonName" />
@@ -55,21 +53,33 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/input_message"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/last_recieved_message"
         android:onClick="sendMessage"
         android:text="Button" />
 
-    <TextView
-        android:id="@+id/last_recieved_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/input_message"
-        android:layout_alignEnd="@+id/input_message"
+
+
+    <ScrollView
+        android:id="@+id/SCROLLER_ID"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/input_message"
-        android:layout_marginBottom="86dp"
-        android:text="@string/recieved_message" />
+        android:layout_below="@+id/txtStatus"
+        android:layout_marginTop="21dp"
+        android:gravity="bottom"
+        android:scrollY="@dimen/activity_horizontal_margin"
+        android:fillViewport="false"
+        android:scrollbars="vertical">
+
+        <TextView
+            android:id="@+id/last_recieved_message"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/button2"
+            android:layout_alignRight="@+id/button2"
+            android:layout_below="@+id/button2" />
+    </ScrollView>
 </RelativeLayout>
