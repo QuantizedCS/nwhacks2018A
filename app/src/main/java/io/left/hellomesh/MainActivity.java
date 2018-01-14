@@ -238,7 +238,7 @@ public class MainActivity extends Activity implements MeshStateListener {
      * Update the {@link TextView} with a list of all peers.
      */
     private void updateStatus() {
-        String status = "My ID: " + mm.getUuid().toString() + "\npeers:\n";
+        String status = "My ID: " + mm.getUuid().toString() + "\n" + "\nPeers:\n";
         for (MeshID user : users) {
             status += user.toString() + "\n";
         }
