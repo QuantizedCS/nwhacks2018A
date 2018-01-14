@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements MeshStateListener {
     // Port to bind app to.
     private static final int HELLO_PORT = 1050;
 
-    private String username = "John Doe";
+    private String username = "Narwal";
 
     // MeshManager instance - interface to the mesh network.
     AndroidMeshManager mm = null;
@@ -272,8 +272,8 @@ public class MainActivity extends Activity implements MeshStateListener {
             MeshUtility.Log(this.getClass().getCanonicalName(), "MSG: " + ms);
             byte[] testData = ms.getBytes();
             mm.sendDataReliable(reciever, HELLO_PORT, testData);
-            mEdit.setText("");
         }
+        mEdit.setText("");
     }
 
     /**
