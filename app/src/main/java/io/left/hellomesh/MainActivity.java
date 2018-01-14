@@ -49,6 +49,7 @@ public class MainActivity extends Activity implements MeshStateListener {
     EditText mEdit;
     String lastmes;
     ScrollView cont;
+    TextView userBox;
 //    TextView messageView;
 
     /**
@@ -66,6 +67,7 @@ public class MainActivity extends Activity implements MeshStateListener {
         mEdit = (EditText) findViewById(R.id.input_message);
         lastmes = ((TextView) findViewById(R.id.last_recieved_message)).getText().toString();
         cont = ((ScrollView) findViewById(R.id.message_container));
+        userBox = (TextView) findViewById(R.id.UserList);
 
 
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
@@ -188,12 +190,13 @@ public class MainActivity extends Activity implements MeshStateListener {
      * Update the {@link TextView} with a list of all peers.
      */
     private void updateStatus() {
-        String status = "uuid: " + mm.getUuid().toString() + "\npeers:\n";
+        String status = "My ID: " + mm.getUuid().toString() + "\npeers:\n";
         for (MeshID user : users) {
             status += user.toString() + "\n";
         }
-        TextView txtStatus = (TextView) findViewById(R.id.txtStatus);
-        txtStatus.setText(status);
+        //TextView txtStatus = (TextView) findViewById(R.id.txtStatus);
+        //txtStatus.setText(status);
+        userBox.setText(status);
         if (lastmes.length()>100){
             lastmes = lastmes.substring(lastmes.indexOf("\n"));
         }
