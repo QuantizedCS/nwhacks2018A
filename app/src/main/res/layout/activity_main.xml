@@ -57,12 +57,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/last_recieved_message"
         android:onClick="sendMessage"
         android:text="Button" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/last_recieved_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/input_message"

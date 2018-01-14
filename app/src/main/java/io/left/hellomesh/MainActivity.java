@@ -39,6 +39,7 @@ public class MainActivity extends Activity implements MeshStateListener {
 
     Button   mButton;
     EditText mEdit;
+    TextView lastmes;
 
     /**
      * Called when app first opens, initializes {@link AndroidMeshManager} reference (which will
@@ -53,7 +54,7 @@ public class MainActivity extends Activity implements MeshStateListener {
 
         mButton = (Button)findViewById(R.id.button2);
         mEdit   = (EditText)findViewById(R.id.input_message);
-
+        lastmes = (TextView)findViewById(R.id.last_recieved_message);
 
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
         mm.setPattern("chatroom");
@@ -171,6 +172,8 @@ public class MainActivity extends Activity implements MeshStateListener {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(MainActivity.this, notification);
                 r.play();
+
+                lastmes.append(message);
             }
         });
     }
