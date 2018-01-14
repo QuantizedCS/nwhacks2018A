@@ -48,6 +48,7 @@ public class MainActivity extends Activity implements MeshStateListener {
     Button   mButton;
     EditText mEdit;
     TextView lastmes;
+    ScrollView cont;
 
     /**
      * Called when app first opens, initializes {@link AndroidMeshManager} reference (which will
@@ -63,6 +64,7 @@ public class MainActivity extends Activity implements MeshStateListener {
         mButton = (Button)findViewById(R.id.button2);
         mEdit   = (EditText)findViewById(R.id.input_message);
         lastmes = (TextView)findViewById(R.id.last_recieved_message);
+        cont = ((ScrollView) findViewById(R.id.message_container));
 
 
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
@@ -213,6 +215,7 @@ public class MainActivity extends Activity implements MeshStateListener {
                 DateFormat df = new SimpleDateFormat("HH:mm:ss");
                 Date d = new Date();
                 lastmes.append(df.format(d)+ ": " + message+"\n");
+                cont.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
     }

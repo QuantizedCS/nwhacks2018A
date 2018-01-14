@@ -62,7 +62,7 @@
 
 
     <ScrollView
-        android:id="@+id/SCROLLER_ID"
+        android:id="@+id/message_container"
         android:layout_width="fill_parent"
         android:layout_height="180dp"
         android:layout_alignParentLeft="true"
