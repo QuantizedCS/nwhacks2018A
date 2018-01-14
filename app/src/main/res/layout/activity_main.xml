@@ -29,15 +29,16 @@
             android:id="@+id/input_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/txtStatus"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/txtStatus"
-            android:layout_marginBottom="29dp"
+            android:background="@android:color/background_light"
+            android:backgroundTint="@android:color/background_light"
             android:ems="10"
             android:hint="@string/message"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:textSize="22sp" />
 
         <Button
             android:id="@+id/Send_Button"
@@ -46,9 +47,12 @@
             android:layout_alignBottom="@+id/input_message"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/input_message"
+            android:background="@color/colorPrimary"
             android:onClick="sendMessage"
-            android:text="@string/Send" />
-
+            android:text="@string/Send"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
 
         <ScrollView
             android:id="@+id/message_container"
@@ -120,22 +124,25 @@
         <!-- List of Actions (pages) -->
         <Button
             android:id="@+id/btnConfigure"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="50dp"
             android:enabled="false"
             android:onClick="configure"
             android:text="Configure"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"/>
 
 
         <TextView
             android:id="@+id/UserList"
             android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:layout_below="@+id/mChUsername"
+            android:layout_below="@id/profileBox"
+            android:layout_above="@+id/mChUsername"
             android:background="#ffffffff"
             android:choiceMode="singleChoice"
             android:padding="8dp"
@@ -146,7 +153,7 @@
             android:id="@+id/mChUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/profileBox"
+            android:layout_above="@+id/btnConfigure"
             android:background="@color/colorPrimary"
             android:onClick="changeUsername"
             android:text="@string/change_username"

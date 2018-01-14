@@ -21,7 +21,11 @@
         android:ems="10"
         android:inputType="text"
         android:layout_marginTop="5dp"
-        android:hint="@string/username" />
+        android:hint="@string/username"
+        android:layout_marginHorizontal="20dp"
+        android:background="@android:color/background_light"
+        android:backgroundTint="@android:color/background_light"
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/mOK"
