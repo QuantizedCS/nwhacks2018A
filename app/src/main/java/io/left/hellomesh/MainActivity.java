@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -32,6 +33,7 @@ import io.reactivex.functions.Consumer;
 import static io.left.rightmesh.mesh.MeshManager.DATA_RECEIVED;
 import static io.left.rightmesh.mesh.MeshManager.PEER_CHANGED;
 import static io.left.rightmesh.mesh.MeshManager.REMOVED;
+
 
 public class MainActivity extends Activity implements MeshStateListener {
     // Port to bind app to.
@@ -73,6 +75,22 @@ public class MainActivity extends Activity implements MeshStateListener {
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
         mm.setPattern("chatroom");
 
+        mEdit.setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View v, int kc, KeyEvent ke){
+                if (ke.getAction()==KeyEvent.ACTION_DOWN&&kc==KeyEvent.KEYCODE_ENTER){
+                    try {
+                        sendMessage(v);
+                        return true;
+                    } catch (RightMeshException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return false;
+            }
+        });
+        mEdit.setImeActionLabel("SEND", KeyEvent.KEYCODE_ENTER);
+
         changeUsername(userBox);
 
 
@@ -109,6 +127,29 @@ public class MainActivity extends Activity implements MeshStateListener {
                 }
             }
         });
+
+        mUsername.setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View v, int kc, KeyEvent ke){
+                if (ke.getAction()==KeyEvent.ACTION_DOWN&&kc==KeyEvent.KEYCODE_ENTER){
+                    if (!(mUsername.getText().toString().isEmpty())) {
+                        Toast.makeText(MainActivity.this,
+                                R.string.success_login_msg,
+                                Toast.LENGTH_SHORT).show();
+                        username = mUsername.getText().toString();
+                        dialog.hide();
+
+                    } else {
+                        Toast.makeText(MainActivity.this,
+                                R.string.error_username_msg,
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+                return false;
+            }
+        });
+        mUsername.setImeActionLabel("OK", KeyEvent.KEYCODE_ENTER);
     }
 
     /**
