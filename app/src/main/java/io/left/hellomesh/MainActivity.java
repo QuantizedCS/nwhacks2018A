@@ -196,6 +196,9 @@ public class MainActivity extends Activity implements MeshStateListener {
         }
         TextView txtStatus = (TextView) findViewById(R.id.txtStatus);
         txtStatus.setText(status);
+        if (lastmes.length()>100){
+            lastmes = lastmes.substring(lastmes.indexOf("\n"));
+        }
         TextView messageView = (TextView) findViewById(R.id.last_recieved_message);
         messageView.setText(lastmes);
     }
@@ -221,6 +224,13 @@ public class MainActivity extends Activity implements MeshStateListener {
                 Date d = new Date();
                 lastmes += df.format(d) + ": " + message + "\n";
                 cont.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                updateStatus();
             }
         });
     }
