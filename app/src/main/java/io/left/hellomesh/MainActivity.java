@@ -56,6 +56,7 @@ public class MainActivity extends Activity implements MeshStateListener {
 
 
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
+        mm.setPattern("chatroom");
     }
 
     /**
