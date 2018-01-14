@@ -2,4 +2,9 @@
     <string name="app_name">HelloMesh</string>
     <string name="message">Type your message here!</string>
     <string name="recieved_message"></string>
+    <string name="username">Username</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="ok">OK</string>
+    <string name="success_login_msg">Username set</string>
+    <string name="error_username_msg">Please fill in empty field</string>
 </resources>
