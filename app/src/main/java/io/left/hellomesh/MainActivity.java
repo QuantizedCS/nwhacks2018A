@@ -35,6 +35,11 @@ import static io.left.rightmesh.mesh.MeshManager.PEER_CHANGED;
 import static io.left.rightmesh.mesh.MeshManager.REMOVED;
 
 
+/**
+ * forked from https://github.com/RightMesh/HelloMesh
+ *
+ */
+
 public class MainActivity extends Activity implements MeshStateListener {
     // Port to bind app to.
     private static final int HELLO_PORT = 1050;
@@ -312,7 +317,7 @@ public class MainActivity extends Activity implements MeshStateListener {
     }
 
     /**
-     * Sends "hello" to all known peers.
+     * Sends the message in mEdit to all known peers.
      *
      * @param v calling view
      */
@@ -325,7 +330,7 @@ public class MainActivity extends Activity implements MeshStateListener {
             mm.sendDataReliable(reciever, HELLO_PORT, testData);
         }
         mEdit.setText("");
-        
+
     }
 
     /**
