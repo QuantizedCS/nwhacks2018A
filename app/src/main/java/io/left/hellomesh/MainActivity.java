@@ -45,8 +45,8 @@ public class MainActivity extends Activity implements MeshStateListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
+        mm.setPattern("chatroom");
     }
 
     /**
