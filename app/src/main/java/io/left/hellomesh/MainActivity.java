@@ -325,6 +325,7 @@ public class MainActivity extends Activity implements MeshStateListener {
             mm.sendDataReliable(reciever, HELLO_PORT, testData);
         }
         mEdit.setText("");
+        
     }
 
     /**
