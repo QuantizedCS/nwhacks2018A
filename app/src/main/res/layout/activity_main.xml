@@ -44,18 +44,32 @@
         android:layout_above="@+id/btnHello"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="17dp"
+        android:layout_toLeftOf="@+id/btnConfigure"
+        android:layout_toStartOf="@+id/btnConfigure"
         android:ems="10"
-        android:hint="@string/edit_Message"
+        android:hint="@string/message"
         android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnConfigure"
-        android:layout_alignStart="@+id/btnConfigure"
-        android:layout_alignTop="@+id/input_message"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView"
         android:onClick="sendMessage"
         android:text="Button" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/input_message"
+        android:layout_alignEnd="@+id/input_message"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/input_message"
+        android:layout_marginBottom="86dp"
+        android:text="@string/recieved_message" />
 </RelativeLayout>

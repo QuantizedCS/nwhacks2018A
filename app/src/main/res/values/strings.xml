@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">HelloMesh</string>
     <string name="message">Type your message here!</string>
-    <string name="edit_Message">Enter a message</string>
+    <string name="recieved_message"></string>
 </resources>
