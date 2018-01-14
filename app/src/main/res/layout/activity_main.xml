@@ -36,4 +36,26 @@
         android:layout_alignParentEnd="true"
         android:onClick="configure"
         android:text="Configure"/>
+
+    <EditText
+        android:id="@+id/input_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtStatus"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="@string/edit_Message"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnConfigure"
+        android:layout_alignStart="@+id/btnConfigure"
+        android:layout_alignTop="@+id/input_message"
+        android:onClick="sendMessage"
+        android:text="Button" />
 </RelativeLayout>

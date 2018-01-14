@@ -5,8 +5,10 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,9 @@ public class MainActivity extends Activity implements MeshStateListener {
     // Set to keep track of peers connected to the mesh.
     HashSet<MeshID> users = new HashSet<>();
 
+    Button   mButton;
+    EditText mEdit;
+
     /**
      * Called when app first opens, initializes {@link AndroidMeshManager} reference (which will
      * start the {@link MeshService} if it isn't already running.
@@ -45,6 +50,10 @@ public class MainActivity extends Activity implements MeshStateListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mButton = (Button)findViewById(R.id.button2);
+        mEdit   = (EditText)findViewById(R.id.input_message);
+
 
         mm = AndroidMeshManager.getInstance(MainActivity.this, MainActivity.this);
     }
@@ -199,6 +208,14 @@ public class MainActivity extends Activity implements MeshStateListener {
             MeshUtility.Log(this.getClass().getCanonicalName(), "MSG: " + msg);
             byte[] testData = msg.getBytes();
             mm.sendDataReliable(receiver, HELLO_PORT, testData);
+        }
+    }
+    public void sendMessage(View v) throws RightMeshException {
+        for(MeshID reciever : users) {
+            String ms= mEdit.getText().toString();
+            MeshUtility.Log(this.getClass().getCanonicalName(), "MSG: " + ms);
+            byte[] testData = ms.getBytes();
+            mm.sendDataReliable(reciever, HELLO_PORT, testData);
         }
     }
 
