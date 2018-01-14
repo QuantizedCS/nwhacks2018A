@@ -278,7 +278,7 @@ public class MainActivity extends Activity implements MeshStateListener {
 
     public void sendMessage(View v) throws RightMeshException {
         for (MeshID reciever : users) {
-            String ms = mEdit.getText().toString();
+            String ms = username + ": " + mEdit.getText().toString();
             MeshUtility.Log(this.getClass().getCanonicalName(), "MSG: " + ms);
             byte[] testData = ms.getBytes();
             mm.sendDataReliable(reciever, HELLO_PORT, testData);
