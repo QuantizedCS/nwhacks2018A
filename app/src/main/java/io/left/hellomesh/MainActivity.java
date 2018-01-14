@@ -168,9 +168,7 @@ public class MainActivity extends Activity implements MeshStateListener {
 
                 // Enable buttons now that mesh is connected.
                 Button btnConfigure = (Button) findViewById(R.id.btnConfigure);
-                Button btnSend = (Button) findViewById(R.id.btnHello);
                 btnConfigure.setEnabled(true);
-                btnSend.setEnabled(true);
             } catch (RightMeshException e) {
                 String status = "Error initializing the library" + e.toString();
                 Toast.makeText(getApplicationContext(), status, Toast.LENGTH_SHORT).show();
@@ -267,14 +265,6 @@ public class MainActivity extends Activity implements MeshStateListener {
      *
      * @param v calling view
      */
-    public void sendHello(View v) throws RightMeshException {
-        for (MeshID receiver : users) {
-            String msg = "Hello to: " + receiver + " from" + mm.getUuid();
-            MeshUtility.Log(this.getClass().getCanonicalName(), "MSG: " + msg);
-            byte[] testData = msg.getBytes();
-            mm.sendDataReliable(receiver, HELLO_PORT, testData);
-        }
-    }
 
     public void sendMessage(View v) throws RightMeshException {
         for (MeshID reciever : users) {
