@@ -50,7 +50,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:onClick="sendMessage"
-        android:text="Button" />
+        android:text="@string/Send" />
 
 
     <ScrollView
